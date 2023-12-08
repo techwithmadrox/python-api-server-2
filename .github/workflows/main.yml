@@ -39,4 +39,5 @@ jobs:
         key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
         script: |
           cd ${{ secrets.EC2_TARGET_PATH }}
+          source venv/bin/activate
           python run.py
