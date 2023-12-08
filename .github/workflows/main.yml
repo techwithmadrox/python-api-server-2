@@ -13,15 +13,6 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.8'  # Specify your Python version
-
-    - name: Install dependencies
-      run: |
-        pip install -r requirements.txt
-
     - name: Copy files to EC2
       uses: easingthemes/ssh-deploy@v2.1.5
       env:
@@ -31,7 +22,7 @@ jobs:
         REMOTE_USER: ${{ secrets.EC2_USER }}
         TARGET: ${{ secrets.EC2_TARGET_PATH }}
 
-    - name: Restart server
+    - name: Start application
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.EC2_HOST }}
@@ -39,5 +30,6 @@ jobs:
         key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
         script: |
           cd ${{ secrets.EC2_TARGET_PATH }}
+          pip3 install -r requirements.txt
           source venv/bin/activate
-          python run.py
+          python3 run.py
