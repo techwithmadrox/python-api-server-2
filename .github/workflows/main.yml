@@ -30,6 +30,6 @@ jobs:
         key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
         script: |
           cd ${{ secrets.EC2_TARGET_PATH }}
-          pip3 install -r requirements.txt
           source venv/bin/activate
+          pip3 install -r requirements.txt
           nohup flask run --host=0.0.0.0 --port=5000 > flask.log 2>&1 &
