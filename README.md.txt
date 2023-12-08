@@ -18,4 +18,4 @@ or use the init_db.py
 python run.py
 ```
 
-The server will start running on http://localhost:5000  
+The server will start running on http://localhost:5000   
